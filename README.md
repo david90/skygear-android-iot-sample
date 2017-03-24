@@ -51,7 +51,7 @@
 ```
 
 - `ping` channel:
-  - We publish an event to the `ping` channel whenever we initiate a ping. There are two ways toping the user: 1) Cron Job at Cloud Code, 2) the ping button on the web panel.
+  - We publish an event to the `ping` channel whenever we initiate a ping. There are three ways toping the user: 1) Cron Job at Cloud Code, 2) the ping button on the web panel, 3) Visit endpoint at https://iotsample.skygeario.com/ping-devices , which will run a ping to all devices.
   - Both web panel and Android device will subscribe to the `ping` channel after login. 
 
 - `reply` channel:
