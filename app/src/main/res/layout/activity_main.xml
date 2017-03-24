@@ -130,4 +130,31 @@
             android:onClick="logoutOnClickHandler" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Send Data Button only works after logging in." />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/data_content_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Data Content"
+        android:inputType="text"
+        android:text="Sample Content" />
+
+    <Button
+        android:id="@+id/send_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendDataOnClickHandler"
+        android:text="Send Data" />
 </LinearLayout>
