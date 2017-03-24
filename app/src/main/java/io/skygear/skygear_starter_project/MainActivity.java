@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             accessToken = currentUser.getAccessToken();
             userId = currentUser.getId();
             subscribeToPing();
+            subscribeToReportSaved();
         } else {
 
         }
@@ -235,18 +237,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void registerReport() {
+    public void subscribeToReportSaved() {
         Pubsub pubsub = Container.defaultContainer(this).getPubsub();
-        pubsub.subscribe("update-channel", new Pubsub.Handler(){
+        pubsub.subscribe("report-saved", new Pubsub.Handler(){
             @Override
             public void handle(JSONObject data) {
-                String msg = null;
-                try {
-                    msg = data.getString("msg");
-                    Log.i("Pubsub", "Receive Update message:"+ msg);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Log.i("Pubsub", "There is a Report saved");
+                Toast.makeText(MainActivity.this, "There is a Report updated",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -277,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
         pubsub.publish("reply", data);
     }
 
-    public void sendDataToServer(String content) {
+    public void sendDataToServer(final String content) {
         // Send record, we will have an afterSave cloud function to send event to the channel.
         // Alternatively, we can call publishEvent on client side.
         // To pick which of these options depends on the usecase.
@@ -295,6 +293,9 @@ public class MainActivity extends AppCompatActivity {
                         "Skygear Record Save",
                         "Successfully saved " + records.length + " records"
                 );
+
+                Toast.makeText(MainActivity.this, "Saved Content:" + content,
+                        Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -310,6 +311,9 @@ public class MainActivity extends AppCompatActivity {
                         "Skygear Record Save",
                         reasons.size() + " records are fail to save"
                 );
+
+                Toast.makeText(MainActivity.this, "Content failed to save",
+                        Toast.LENGTH_LONG).show();
             }
 
             @Override
