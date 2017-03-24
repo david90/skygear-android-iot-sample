@@ -323,15 +323,4 @@ public class MainActivity extends AppCompatActivity {
 
         publicDatabase.save(aReport, handler);
     }
-
-    public void publishEvent(){
-        try {
-            Pubsub pubsub = Container.defaultContainer(this).getPubsub();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("msg", "Hello World");
-            pubsub.publish("update-channel", jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 }
